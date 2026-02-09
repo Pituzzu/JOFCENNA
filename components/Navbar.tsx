@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Facebook, Instagram, ChevronDown } from 'lucide-react';
 import { ViewState } from '../App';
@@ -39,7 +40,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
       submenu: [
         { name: 'STORIA', href: '#storia', action: 'home' },
         { name: 'SOCI FONDATORI', href: '#', action: 'founders' },
-        { name: 'DIRETTIVO', href: '#direttivo', action: 'wip' },
+        { name: 'DIRETTIVO', href: '#', action: 'board-members' },
         { name: 'SEDE', href: '#sede', action: 'home' }
       ]
     },
@@ -73,6 +74,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
           onNavigate('members');
       } else if (action === 'founders') {
           onNavigate('founders');
+      } else if (action === 'board-members') {
+          onNavigate('board-members');
       } else {
           onNavigate('home');
           // Allow time for view switch then scroll if hash

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ViewState } from '../App';
 
 interface NewsCardData {
   id: number;
@@ -7,11 +9,11 @@ interface NewsCardData {
   category: string;
   image: string;
   buttonText: string;
-  action?: string; // Optional action identifier
+  action?: ViewState; 
 }
 
 interface NewsSectionProps {
-  onNavigate: (view: any) => void;
+  onNavigate: (view: ViewState) => void;
 }
 
 const NEWS_ITEMS: NewsCardData[] = [
@@ -23,7 +25,7 @@ const NEWS_ITEMS: NewsCardData[] = [
     buttonText: "Iscriviti Ora"
   },
   {
-    id: 99, // Special ID for the new item
+    id: 99, 
     category: "Solidarietà",
     title: "Raccolta Solidale 2025 – Il Natale di Tutti",
     image: "https://palestralc.altervista.org/img/RACCOLTA.jpeg",
@@ -39,166 +41,176 @@ const NEWS_ITEMS: NewsCardData[] = [
   },
   {
     id: 3,
-    category: "Eventi",
-    title: "Eventi in Sede: Calendario",
-    image: "https://images.unsplash.com/photo-1510051640316-543eee9f3ffa?q=80&w=800&auto=format&fit=crop",
-    buttonText: "Scopri Date"
+    category: "Comunicazione Ufficiale",
+    title: "Rinnovo Consiglio Direttivo",
+    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop",
+    buttonText: "Leggi l'Articolo",
+    action: "board-election"
   },
   {
     id: 4,
-    category: "Biglietteria",
-    title: "Biglietti Juve - Inter",
-    image: "https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?q=80&w=800&auto=format&fit=crop", // Stadium seats
-    buttonText: "Info Soci"
+    category: "Riconoscimenti",
+    title: "Premiati al JOFC Day 2025 per l'evento con Vucinic",
+    image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=800&auto=format&fit=crop", 
+    buttonText: "Leggi l'Articolo",
+    action: "jofc-award"
   },
   {
     id: 5,
-    category: "Storia",
-    title: "Visita allo Juventus Museum",
-    image: "https://images.unsplash.com/photo-1522770179533-24471fcdba45?q=80&w=800&auto=format&fit=crop", // Museum/Artistic
-    buttonText: "Organizza"
-  },
-  {
-    id: 6,
-    category: "Merchandising",
-    title: "Nuovi Gadget Club Enna",
-    image: "https://images.unsplash.com/photo-1556906781-9a412961c28c?q=80&w=800&auto=format&fit=crop", // Shoes/Merch
-    buttonText: "Guarda Catalogo"
+    category: "Nomina Ufficiale",
+    title: "Presidente Michele Russo nominato Referente Regionale",
+    image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop", 
+    buttonText: "Leggi l'Articolo",
+    action: "president-referent"
   }
 ];
 
 const PARTNERS = [
   { id: 1, url: "http://palestralc.altervista.org/img/print.png", name: "Print" },
   { id: 2, url: "http://palestralc.altervista.org/img/La_nuova_posta.png", name: "La Nuova Posta" },
-  { id: 3, url: "http://palestralc.altervista.org/img/Americo_Generali.png", name: "Americo Generali" }
+  { id: 3, url: "http://palestralc.altervista.org/img/Americo_Generali.png", name: "Americo Generali" },
+  { id: 4, url: null, name: "Spazio Disponibile" },
+  { id: 5, url: null, name: "Spazio Disponibile" },
+  { id: 6, url: null, name: "Spazio Disponibile" },
+  { id: 7, url: null, name: "Spazio Disponibile" },
+  { id: 8, url: null, name: "Spazio Disponibile" },
 ];
 
 const NewsSection: React.FC<NewsSectionProps> = ({ onNavigate }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [visibleItems, setVisibleItems] = useState(2);
 
-  // Separation of content:
-  // First item is for the Static Column (Left)
-  // Rest of items are for the Carousel (Center)
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setVisibleItems(1);
+      } else {
+        setVisibleItems(2);
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const staticNews = NEWS_ITEMS[0];
   const scrollingNews = NEWS_ITEMS.slice(1);
   
   const nextSlide = () => {
     setCurrentIndex((prev) => 
-      prev === scrollingNews.length - 1 ? 0 : prev + 1
+      prev >= scrollingNews.length - visibleItems ? 0 : prev + 1
     );
   };
 
   const prevSlide = () => {
     setCurrentIndex((prev) => 
-      prev === 0 ? scrollingNews.length - 1 : prev - 1
+      prev === 0 ? Math.max(0, scrollingNews.length - visibleItems) : prev - 1
     );
   };
 
-  const handleNewsClick = (action?: string) => {
-    if (action === 'charity') {
-      onNavigate('charity');
+  const handleNewsClick = (action?: ViewState) => {
+    if (action) {
+      onNavigate(action);
     }
-    // Other actions can be handled here
   };
 
   return (
-    <section id="news" className="relative z-20 py-24">
-      {/* Container is transparent to let Hero video show through (Parallax effect) */}
+    <section id="news" className="relative z-20 py-16 md:py-24">
       <div className="container mx-auto px-4">
-        
-        {/* NEW GRID LAYOUT: 3 Columns on LG screens */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+        <div className="flex flex-col gap-12 md:gap-16">
           
-          {/* COLUMN 1: STATIC IMAGE (Tesseramento) */}
-          <div className="hidden lg:block lg:col-span-1 h-full min-h-[500px]">
-             <div 
-               className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl group border border-white/10 bg-black cursor-pointer"
-               onClick={() => handleNewsClick(staticNews.action)}
-             >
-                <img 
-                  src={staticNews.image} 
-                  alt={staticNews.title} 
-                  className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
-                />
-                
-                {/* Removed overlay text as requested */}
-                <div className="absolute inset-0 bg-transparent group-hover:bg-black/10 transition-colors duration-300"></div>
-             </div>
-          </div>
+          {/* TOP ROW: Locandina + Ultime Notizie */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            <div className="lg:col-span-4 h-full min-h-[400px]">
+               <div 
+                 className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-black cursor-pointer"
+                 onClick={() => handleNewsClick(staticNews.action)}
+               >
+                  <img 
+                    src={staticNews.image} 
+                    alt={staticNews.title} 
+                    className="w-full h-full object-contain"
+                  />
+               </div>
+            </div>
 
-          {/* COLUMN 2: SCROLLING CAROUSEL (Center) */}
-          <div className="lg:col-span-1 relative flex flex-col justify-center min-h-[500px]">
-             
-             {/* Controls Header */}
-             <div className="flex justify-between items-center mb-4">
-                <h3 className="text-white font-display font-bold uppercase text-xl drop-shadow-md">
-                   Ultime Notizie
-                </h3>
-                <div className="flex gap-2">
-                   <button onClick={prevSlide} className="bg-black/80 hover:bg-juve-gold text-white p-2 rounded-full transition-colors border border-white/20">
-                      <ChevronLeft className="w-5 h-5" />
-                   </button>
-                   <button onClick={nextSlide} className="bg-black/80 hover:bg-juve-gold text-white p-2 rounded-full transition-colors border border-white/20">
-                      <ChevronRight className="w-5 h-5" />
-                   </button>
-                </div>
-             </div>
+            <div className="lg:col-span-8 relative flex flex-col justify-center min-h-[400px]">
+               <div className="flex justify-between items-center mb-6">
+                  <h3 className="text-white font-display font-bold uppercase text-2xl drop-shadow-md border-l-4 border-juve-gold pl-4">
+                     Ultime Notizie
+                  </h3>
+                  <div className="flex gap-2">
+                     <button onClick={prevSlide} className="bg-white/10 hover:bg-juve-gold text-white p-2 rounded-full transition-colors border border-white/20 backdrop-blur-md">
+                        <ChevronLeft className="w-5 h-5" />
+                     </button>
+                     <button onClick={nextSlide} className="bg-white/10 hover:bg-juve-gold text-white p-2 rounded-full transition-colors border border-white/20 backdrop-blur-md">
+                        <ChevronRight className="w-5 h-5" />
+                     </button>
+                  </div>
+               </div>
 
-             {/* Slider Track Container */}
-             <div className="overflow-hidden w-full h-full rounded-2xl">
-                <div 
-                  className="flex transition-transform duration-500 ease-out h-full"
-                  style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-                >
-                   {scrollingNews.map((item) => (
-                      <div 
-                        key={item.id} 
-                        className="min-w-full p-0 h-full cursor-pointer"
-                        onClick={() => handleNewsClick(item.action)}
-                      >
-                         <div className="group relative w-full h-[500px] overflow-hidden rounded-2xl shadow-2xl bg-black transform transition-all duration-300">
-                            {/* Background Image */}
-                            <img 
-                              src={item.image} 
-                              alt={item.title} 
-                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
-                            />
-                            
-                            {/* Overlay Gradient */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-
-                            {/* Content Overlay */}
-                            <div className="absolute bottom-0 left-0 w-full p-8">
-                              <h4 className="text-juve-gold font-bold text-xs uppercase tracking-widest mb-2">{item.category}</h4>
-                              <h3 className="font-display font-bold text-2xl text-white uppercase leading-none mb-6 drop-shadow-lg line-clamp-2">
-                                {item.title}
-                              </h3>
-                              <button className="bg-white text-black font-display font-bold uppercase text-xs px-8 py-4 hover:bg-juve-gold hover:text-white transition-colors">
-                                {item.buttonText}
-                              </button>
-                            </div>
+               <div className="overflow-hidden w-full h-full rounded-2xl">
+                  <div 
+                    className="flex transition-transform duration-500 ease-out h-full gap-4"
+                    style={{ transform: `translateX(-${currentIndex * (100 / visibleItems)}%)` }}
+                  >
+                     {scrollingNews.map((item) => (
+                        <div 
+                          key={item.id} 
+                          className={`min-w-full lg:min-w-[calc(50%-8px)] p-0 h-full cursor-pointer`}
+                          onClick={() => handleNewsClick(item.action)}
+                        >
+                           <div className="group relative w-full h-[450px] overflow-hidden rounded-2xl shadow-xl bg-black transform transition-all duration-300">
+                              <img 
+                                src={item.image} 
+                                alt={item.title} 
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+                              <div className="absolute bottom-0 left-0 w-full p-6">
+                                <h4 className="text-juve-gold font-bold text-[10px] uppercase tracking-widest mb-2">{item.category}</h4>
+                                <h3 className="font-display font-bold text-xl text-white uppercase leading-tight mb-4 drop-shadow-lg line-clamp-2">
+                                  {item.title}
+                                </h3>
+                                <button className="bg-white text-black font-display font-bold uppercase text-[10px] px-6 py-3 hover:bg-juve-gold hover:text-white transition-colors tracking-widest">
+                                  {item.buttonText}
+                                </button>
+                              </div>
+                          </div>
                         </div>
-                      </div>
-                   ))}
-                </div>
-             </div>
+                     ))}
+                  </div>
+               </div>
+            </div>
           </div>
 
-          {/* COLUMN 3: PARTNERS (Right) */}
-          <div className="lg:col-span-1 w-full h-full">
-            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden p-8 h-full flex flex-col min-h-[500px]">
-              <h3 className="font-display font-bold text-xl uppercase tracking-widest mb-8 text-black border-l-4 border-juve-gold pl-4">
+          {/* BOTTOM ROW: PARTNERS SECTION - Spazio bianco minimizzato */}
+          <div className="w-full">
+            <div className="mb-4 flex items-center justify-between">
+              <h3 className="font-display font-bold text-xl md:text-2xl uppercase tracking-widest text-white drop-shadow-lg">
                 Official Partner 2025/26
               </h3>
-              
-              <div className="flex flex-col gap-8 flex-grow overflow-y-auto max-h-[600px] scrollbar-hide py-4">
+              <div className="h-px flex-grow bg-white/20 ml-6 hidden md:block"></div>
+            </div>
+
+            <div className="bg-gray-300 rounded-xl shadow-2xl overflow-hidden border border-white/5">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-gray-300">
                 {PARTNERS.map((partner) => (
-                  <div key={partner.id} className="w-full shrink-0 border border-gray-100 rounded-lg flex items-center justify-center bg-white hover:bg-gray-50 transition-all cursor-pointer group shadow-sm hover:shadow-md p-4 overflow-hidden h-auto">
-                     <img 
-                        src={partner.url} 
-                        alt={partner.name} 
-                        className="max-w-full h-auto object-contain transition-transform group-hover:scale-105"
-                     />
+                  <div 
+                    key={partner.id} 
+                    className="h-24 md:h-32 w-full flex items-center justify-center bg-white overflow-hidden p-1 md:p-2"
+                  >
+                     {partner.url ? (
+                        <img 
+                          src={partner.url} 
+                          alt={partner.name} 
+                          className="w-full h-full object-contain pointer-events-none" 
+                        />
+                     ) : (
+                        <div className="flex flex-col items-center gap-1 opacity-10 select-none w-full h-full justify-center bg-gray-50">
+                          <span className="text-[8px] font-display font-black text-gray-500 uppercase tracking-widest">Partner</span>
+                        </div>
+                     )}
                   </div>
                 ))}
               </div>
