@@ -5,7 +5,7 @@ const MEMBERS_KEY = "jofc_enna_members_v1";
 
 // Lista iniziale basata sui dati forniti
 const INITIAL_MEMBERS_DATA: {name: string, birthDate?: string}[] = [
-  { name: "Russo Michele", birthDate: "1991-02-11" },
+  { name: "Russo Michele", birthDate: "1991-08-25" },
   { name: "Ferro Angelo" },
   { name: "Ferro Mattia" },
   { name: "Di Bella Ugo" },
