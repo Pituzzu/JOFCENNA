@@ -90,11 +90,20 @@ const EnnaCityPage: React.FC<EnnaCityPageProps> = ({ onBack }) => {
              </div>
           </div>
 
+          {/* New Black and White Image Section */}
+          <div className="w-full h-auto bg-black overflow-hidden">
+            <img 
+              src="http://avid3952177.altervista.org/img/enna.jpg" 
+              alt="Panorama Enna" 
+              className="w-full h-auto grayscale contrast-125 brightness-90 hover:grayscale-0 transition-all duration-1000"
+            />
+          </div>
+
           <div className="p-8 md:p-16">
             {/* Intro text */}
             <div className="prose prose-lg text-gray-800 font-sans mb-16 text-justify leading-relaxed max-w-none">
               <p className="text-xl font-bold mb-6 border-l-4 border-juve-gold pl-6 italic text-black">
-                Enna è un comune italiano di 28.161 abitanti, capoluogo della provincia più alta d'Italia e cuore pulsante della Sicilia.
+                Enna è un comune italiano, capoluogo di provincia più alto d'Italia e cuore pulsante della Sicilia.
               </p>
               
               <p className="mb-6">

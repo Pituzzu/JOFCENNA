@@ -219,9 +219,6 @@ export const getMembers = (): Member[] => {
   if (saved) {
     try {
       const parsed = JSON.parse(saved);
-      // Se la lista salvata è vuota o molto più corta di quella iniziale (reset manuale o errore), 
-      // ricarichiamo quella iniziale per sicurezza, ma solo se siamo in dev o per fix. 
-      // Qui ci fidiamo del localStorage se esiste, altrimenti usiamo INITIAL_MEMBERS_DATA
       if (parsed.length > 0) return parsed;
     } catch (e) {
       console.error("Errore parsing soci", e);
@@ -234,7 +231,6 @@ export const getMembers = (): Member[] => {
     birthDate: item.birthDate || ""
   }));
   
-  // Salviamo subito per popolarlo la prima volta
   saveMembers(initial);
   return initial;
 };
