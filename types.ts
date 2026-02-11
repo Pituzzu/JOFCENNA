@@ -1,3 +1,4 @@
+
 export interface NewsItem {
   id: number;
   title: string;
@@ -5,6 +6,12 @@ export interface NewsItem {
   date: string;
   imageUrl: string;
   category: string;
+}
+
+export interface Member {
+  id: string;
+  name: string;
+  birthDate?: string; // Format: YYYY-MM-DD
 }
 
 export interface MemberTier {

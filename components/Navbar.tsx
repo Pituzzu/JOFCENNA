@@ -49,13 +49,14 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
       name: 'GALLERY', 
       href: '#gallery',
       submenu: [
-        { name: 'EVENTI', href: '#', action: 'wip' },
+        { name: 'EVENTI', href: '#', action: 'events-gallery' },
         { name: 'ALLIANZ STADIUM', href: '#', action: 'wip' },
         { name: 'TRASFERTE', href: '#', action: 'wip' },
-        { name: 'CLUB', href: '#', action: 'wip' }
+        { name: 'CLUB', href: '#', action: 'wip' },
+        { name: 'VIDEOMESSAGGI', href: '#', action: 'wip' }
       ]
     },
-    { name: 'ENNA', href: '#', action: 'wip' },
+    { name: 'ENNA', href: '#', action: 'enna' },
     { name: 'CONTATTI', href: '#contact' },
   ];
 
@@ -76,9 +77,12 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
           onNavigate('founders');
       } else if (action === 'board-members') {
           onNavigate('board-members');
+      } else if (action === 'events-gallery') {
+          onNavigate('events-gallery');
+      } else if (action === 'enna') {
+          onNavigate('enna');
       } else {
           onNavigate('home');
-          // Allow time for view switch then scroll if hash
           if (href && href.startsWith('#')) {
              setTimeout(() => {
                  const element = document.querySelector(href);
@@ -95,22 +99,20 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
   };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 bg-white text-black ${scrolled ? 'py-2 shadow-lg' : 'py-4 shadow-sm'}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 bg-white text-black ${scrolled ? 'py-1 shadow-lg' : 'py-2 shadow-sm'}`}>
       <div className="container mx-auto px-4 flex items-center relative">
-        {/* Logo Area - Left (Image Only) */}
         <div className="flex items-center gap-4 cursor-pointer" onClick={() => onNavigate('home')}>
           <img 
             src="http://palestralc.altervista.org/img/FAN_BLACK_ENNA.png" 
             onError={(e) => {
                 e.currentTarget.src = "https://upload.wikimedia.org/wikipedia/commons/5/51/Juventus_FC_2017_logo.svg";
-                e.currentTarget.className = "h-16 w-auto p-2 filter brightness-0"; 
+                e.currentTarget.className = "h-12 w-auto p-2 filter brightness-0"; 
             }}
             alt="Juventus Official Fan Club Enna" 
-            className="h-16 w-auto object-contain"
+            className="h-12 md:h-14 w-auto object-contain transition-all"
           />
         </div>
 
-        {/* Desktop Menu - Moved to Right */}
         <div className="hidden md:flex items-center gap-8 ml-auto mr-10">
           {navLinks.map((link) => (
             <div key={link.name} className="relative group">
@@ -120,13 +122,12 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                     e.preventDefault();
                     handleNavigation(link.action, link.href);
                 }}
-                className="flex items-center text-black font-display font-bold text-lg hover:text-juve-gold transition-colors py-4 cursor-pointer"
+                className="flex items-center text-black font-display font-bold text-base hover:text-juve-gold transition-colors py-3 cursor-pointer"
               >
                 {link.name}
-                {link.submenu && <ChevronDown className="ml-1 w-4 h-4" />}
+                {link.submenu && <ChevronDown className="ml-1 w-3 h-3" />}
               </a>
               
-              {/* Desktop Submenu (Hover) */}
               {link.submenu && (
                 <div className="absolute left-0 top-full w-48 bg-white border border-gray-100 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 rounded-b-lg overflow-hidden">
                   {link.submenu.map((subItem) => (
@@ -137,7 +138,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                           e.preventDefault();
                           handleNavigation(subItem.action, subItem.href);
                       }}
-                      className="block px-6 py-3 text-sm font-bold uppercase hover:bg-juve-gray hover:text-juve-gold transition-colors border-b border-gray-50 last:border-0"
+                      className="block px-6 py-3 text-xs font-bold uppercase hover:bg-juve-gray hover:text-juve-gold transition-colors border-b border-gray-50 last:border-0"
                     >
                       {subItem.name}
                     </a>
@@ -148,28 +149,25 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
           ))}
         </div>
 
-        {/* Socials - Far Right */}
         <div className="hidden md:flex items-center gap-6">
           <div className="flex items-center gap-6">
             <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-              <Instagram className="w-5 h-5" style={{ color: '#E1306C' }} />
+              <Instagram className="w-4 h-4" style={{ color: '#E1306C' }} />
             </a>
             <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-              <Facebook className="w-5 h-5" style={{ color: '#E1306C' }} />
+              <Facebook className="w-4 h-4" style={{ color: '#E1306C' }} />
             </a>
           </div>
         </div>
 
-        {/* Mobile Toggle */}
         <button 
           className="md:hidden text-black ml-auto"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+          {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-white border-t border-gray-200 shadow-xl max-h-[90vh] overflow-y-auto">
           <div className="flex flex-col p-6 gap-6 text-center">
@@ -178,7 +176,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                 <div className="flex items-center justify-center gap-2 w-full">
                    <a 
                     href={link.submenu ? '#' : link.href}
-                    className="text-black font-display font-bold text-xl hover:text-juve-gold"
+                    className="text-black font-display font-bold text-lg hover:text-juve-gold"
                     onClick={(e) => {
                       if (link.submenu) {
                         e.preventDefault();
@@ -193,20 +191,19 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                   </a>
                   {link.submenu && (
                     <ChevronDown 
-                      className={`w-5 h-5 transition-transform ${mobileSubmenuOpen === link.name ? 'rotate-180' : ''}`} 
+                      className={`w-4 h-4 transition-transform ${mobileSubmenuOpen === link.name ? 'rotate-180' : ''}`} 
                       onClick={() => toggleMobileSubmenu(link.name)}
                     />
                   )}
                 </div>
 
-                {/* Mobile Submenu */}
                 {link.submenu && mobileSubmenuOpen === link.name && (
                   <div className="flex flex-col gap-4 mt-4 bg-gray-50 w-full p-4 rounded-lg animate-fade-in-up">
                     {link.submenu.map((subItem) => (
                       <a
                         key={subItem.name}
                         href={subItem.href}
-                        className="text-gray-600 font-bold text-sm uppercase hover:text-juve-gold"
+                        className="text-gray-600 font-bold text-xs uppercase hover:text-juve-gold"
                         onClick={(e) => {
                             e.preventDefault();
                             handleNavigation(subItem.action, subItem.href);
@@ -223,8 +220,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
             <div className="h-px bg-gray-200 w-full"></div>
             
             <div className="flex gap-6 justify-center">
-                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity"><Instagram className="w-6 h-6" style={{ color: '#E1306C' }} /></a>
-                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity"><Facebook className="w-6 h-6" style={{ color: '#E1306C' }} /></a>
+                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity"><Instagram className="w-5 h-5" style={{ color: '#E1306C' }} /></a>
+                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity"><Facebook className="w-5 h-5" style={{ color: '#E1306C' }} /></a>
             </div>
           </div>
         </div>

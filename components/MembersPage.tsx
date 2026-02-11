@@ -1,63 +1,26 @@
-import React from 'react';
 
-// Elenco Soci Reale Stagione 25/26
-const MEMBERS_LIST = [
-  "Russo Michele", "Ferro Angelo", "Ferro Mattia", "Di Bella Ugo", "Lombardo Luciano", 
-  "Lombardo Mirko", "Andolina Luca", "Andolina Luca", "Bertino Salvatore", "Vullo Salvatore", 
-  "Vullo Giovanni Maria", "Vicari Maria Stefania", "Di Franco Samantha Maria", "Sanfilippo Carlo Federico G.", 
-  "Sanfilippo Diego", "Ballistreri Alessio", "Giliberto Angelo", "Lucchese Mario", "Arnaldi Micaela", 
-  "Lucchese Sonia", "Lattarico Francesco", "Bumbaca Saverio", "D'Agostino Anna Maria", "Passalacqua Ferruccio", 
-  "Passalacqua Francesco", "Costa Riccardo Maria", "Costa Davide", "Salvaggio Giuliana Maria", "Gervasi Paolo", 
-  "Di Marco Giuseppe", "Di Marco Salvatore", "Taormina David", "Passalacqua Raffaele", "Sicurezza Paolo", 
-  "Sicurezza Fsco Paolo", "Sicurezza Marco", "Sicurezza Stefania", "Manusè Giulia", "Manusè Marco", 
-  "Sicurezza Giuseppe", "Tosetto Giuseppe", "D'Alù Angelo Domenico", "Dal Piva Simone", "Gruttadauria Miki Francesco", 
-  "Gruttadauria Josephine Lucy", "Gueli Asia", "Geraci Leandro", "Geraci Mirko", "Battaglia Cesare", 
-  "Castro Carmelo", "Arena Giancarlo", "Carta Libera", "Arena Roberto", "Arena Giuliana", "Puglia Michelangelo", 
-  "Di Fina Santo", "Di Fina Sebastiano", "Calì Antonio", "Favale Matteo", "Mingrino Luciano", "Cannarozzo Paolo", 
-  "Guglielmaci Guido", "Cristaldi Vincenzo", "La Manna Damiano", "Alessandra Luigi Pasquale", "Mantegna Francesco", 
-  "De Rose Carmelo", "De Rose Ezio", "De Rose Giuseppe", "Miserendino Matteo", "Ambra Laura", "Rivoli Salvatore", 
-  "Faggiano Francesca", "Rivoli Mario", "Laiosa Valerio", "Oglialoro Giulia", "Canerini Calogero", 
-  "Di Fede Maria Concetta", "Nicosia Gaetano", "Calì Giulia", "Calì Gabriele", "Lo Porto Giuseppe", 
-  "Sulsenti Vincenzo", "Cannarozzo Sebastiano", "Patelmo Mario", "Mangione Simone", "Savoca Sebastiano Primo", 
-  "Di Fabrizio Davide Neva", "Minardi Carmelo", "Di Bella Giuliana", "Primavera Tea", "Primavera Clara", 
-  "Perna Giovanni Biagio", "Rizzo Alberto", "Guasto Antonio", "Pavano Giovanni", "Pavano Rosario", 
-  "Zarrelli Armando", "Agozzino Silvestro", "Acciaro Giuseppe", "Fileccia Samuele", "Cimino Gaetano", 
-  "Morgano Giuseppe", "Severino Paolo", "Serra Pierluigi", "Serra Salvatore", "Campisi Vincenzo", 
-  "Campione Alessio", "Di Barca Gaetano", "Puglisi Hermes", "Testaì Giuseppe", "Vitale Giuseppe", 
-  "Billanti Samuel Mario", "Rimoldi Manuel", "Cucco Stefano", "Ragona Vincenzo", "Ragona Mattia", 
-  "Ragona Ivan Luciano", "Iannello Luca Pio", "Schmaus Thomas", "Nasello Mario Antonino", "Colaleo Maurizio", 
-  "Nicosia Carmelo Piero", "Nicosia Mario", "Calascibetta Santo", "Gruttadauria Aida", "Coniglione Cristian", 
-  "Ginepri Azzurra", "Oliveri Gemma Maria", "Saltaleggio Emmanuel", "Macaluso Andrea", "Di Dio Mattia Giovanni", 
-  "Termine Giovanni", "Sicurezza Massimo", "Andolina Paolo", "Baldi Enrico", "Micali Marco", 
-  "Hashemizdehnaeini Shabnam", "Milano Vincenzo", "Calì Christian", "Placenti Simona", "Gervasi Alessandro", 
-  "Greca Roberto", "Ciccio Salvatore", "Alaimo Davide", "Contraffatto Federico", "Lahmice Abdellatif", 
-  "Giangreco Simone", "Giangreco Elisabetta", "Gervasi Ilaria", "Bonasera Fabrizio", "Randazzo Desirè", 
-  "Piazza Giuseppe", "Giunta Danilo Orazio", "Rossignolo Sebastiano", "Farina Salvatore Luca", "Giannone Calogero", 
-  "Giannone Samuele", "Palmeri Maurizio", "Di Prima Giuseppe", "Di Prima Mario", "De Santis Jessica", 
-  "Nasonte Massimiliano", "Nasonte Saverio", "Passalacqua Filippo", "Cristaldi Bruno Michael", "Mangione Simone", 
-  "Mangione Emanuele", "Borghese Francesco", "Di Franco Giuseppe", "Piazza Giuseppe (giovane)", "Milano Stefano", 
-  "Americo Lorenzo", "Americo Tommaso", "Ferraro Gianluca", "Ferraro Francesco", "Ferraro Francesco", 
-  "Berna Nasca Giacomo", "Benvegna Melania", "La Cognata Giuseppe", "Costarelli Jhonny", "Costarelli Matthias", 
-  "D'Alù Ivan", "Benvegna Marzia Ambra", "Tchouyo Yakam Ivan Francesco", "La Delia Carmelo", "La Delia Giuseppe", 
-  "Micali Matteo", "Sgrò Francesco Lucio", "Sgrò Leonardo", "Schembri Rosaria", "Sgrò Serena", 
-  "Campanile Eleonora Maria", "Vigni Antonino", "Greco Giuseppe", "Napoli Matteo", "Librizzi Daniele", 
-  "Barreca Danilo", "Buscemi Davide", "Di Dio Randazzo Stefano", "Di Dio Randazzo Andrea", 
-  "Di Dio Randazzo Francesco", "Gervasi Francesco Aldo", "Lianzi Sandro"
-];
+import React, { useState, useEffect } from 'react';
+import { getMembers } from '../services/dataService';
+import { Member } from '../types';
 
 const MembersPage: React.FC = () => {
+  const [members, setMembers] = useState<Member[]>([]);
+
+  useEffect(() => {
+    setMembers(getMembers());
+  }, []);
+
   // Ordina la lista alfabeticamente
-  const sortedList = [...MEMBERS_LIST].sort((a, b) => a.localeCompare(b));
+  const sortedList = [...members].sort((a, b) => a.name.localeCompare(b.name));
 
   // Raggruppa i soci per lettera iniziale
-  const groupedMembers = sortedList.reduce((acc, name) => {
-    // Gestione spazi vuoti o nomi errati
-    if (!name) return acc;
-    const letter = name.charAt(0).toUpperCase();
+  const groupedMembers = sortedList.reduce((acc, member) => {
+    if (!member.name) return acc;
+    const letter = member.name.charAt(0).toUpperCase();
     if (!acc[letter]) {
       acc[letter] = [];
     }
-    acc[letter].push(name);
+    acc[letter].push(member.name);
     return acc;
   }, {} as Record<string, string[]>);
 
@@ -70,6 +33,7 @@ const MembersPage: React.FC = () => {
          <img 
             src="http://palestralc.altervista.org/img/FAN_WHITE_ENNA.png" 
             className="w-[80%] md:w-[50%] h-auto grayscale"
+            alt="Watermark"
          />
       </div>
 
@@ -81,7 +45,7 @@ const MembersPage: React.FC = () => {
            {/* Top Stats Bar */}
            <div className="bg-black p-6 md:p-8 flex flex-col md:flex-row justify-between items-center border-b-4 border-juve-gold relative overflow-hidden">
               {/* Decorative Stripes */}
-              <div className="absolute top-0 right-0 h-full w-24 bg-[repeating-linear-gradient(45deg,#333,#333_1px,transparent_1px,transparent_10px)] opacity-20"></div>
+              <div className="absolute top-0 right-0 h-full w-24 bg-[repeating-linear-gradient(45deg,#333,#333_1px,transparent_1px,transparent_20px)] opacity-20"></div>
 
               <div className="flex items-center gap-4 mb-4 md:mb-0 z-10">
                  <div className="w-12 h-12 bg-juve-gold rounded-full flex items-center justify-center text-black font-bold shadow-lg shrink-0">
@@ -89,14 +53,14 @@ const MembersPage: React.FC = () => {
                  </div>
                  <div>
                     <h3 className="font-display font-bold text-white text-lg md:text-xl uppercase tracking-wider">ELENCO SOCI STAGIONE 2025/26</h3>
-                    <p className="text-white text-xs font-medium uppercase">Aggiornato ad oggi</p>
+                    <p className="text-white text-xs font-medium uppercase">Aggiornato dal Direttivo</p>
                  </div>
               </div>
               
               {/* Only the Number */}
               <div className="flex items-baseline z-10">
                  <span className="font-display font-black text-6xl md:text-7xl text-juve-gold leading-none drop-shadow-md">
-                    {MEMBERS_LIST.length}
+                    {members.length}
                  </span>
               </div>
            </div>

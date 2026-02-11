@@ -1,17 +1,28 @@
+
 import React from 'react';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  onAdminClick?: () => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
   return (
     <footer className="relative z-20 bg-black text-white py-12 border-t border-gray-900">
       <div className="container mx-auto px-4">
         {/* Main Content */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <img 
-              src="http://palestralc.altervista.org/img/FAN_WHITE_ENNA.png" 
-              alt="Juventus Official Fan Club Enna" 
-              className="w-24 mb-4 object-contain"
-            />
+            <button 
+              onClick={onAdminClick}
+              className="group relative focus:outline-none"
+            >
+              <img 
+                src="http://palestralc.altervista.org/img/FAN_WHITE_ENNA.png" 
+                alt="Juventus Official Fan Club Enna" 
+                className="w-24 mb-4 object-contain transition-transform group-hover:scale-105"
+              />
+              <div className="absolute -inset-2 bg-juve-gold/0 group-hover:bg-juve-gold/5 rounded-full transition-all duration-300"></div>
+            </button>
             <p className="text-white text-sm font-display tracking-wider mb-2 font-bold">
               &copy; {new Date().getFullYear()} JOFC ENNA
             </p>
