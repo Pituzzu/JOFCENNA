@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { Mail, MapPin, Facebook, Instagram } from 'lucide-react';
+import { Mail, MapPin, Facebook, Instagram, Info } from 'lucide-react';
 
 const ContactSection: React.FC = () => {
   const socialLinks = {
@@ -54,30 +55,41 @@ const ContactSection: React.FC = () => {
           </div>
 
           {/* Form Side */}
-          <div className="p-12 md:w-2/3 bg-white">
-            <h3 className="font-display font-bold text-4xl text-black uppercase mb-8 tracking-tighter">Inviaci un Messaggio</h3>
-            <form className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="relative group">
-                  <label className="block text-xs font-bold uppercase text-gray-400 mb-2 group-focus-within:text-black transition-colors">Nome</label>
-                  <input type="text" className="w-full border-b-2 border-gray-200 focus:border-black outline-none py-3 transition-all text-black font-medium" placeholder="Inserisci il tuo nome" />
+          <div className="p-12 md:w-2/3 bg-white relative">
+            <h3 className="font-display font-bold text-4xl text-black uppercase mb-4 tracking-tighter">Inviaci un Messaggio</h3>
+            
+            {/* Note about inactive form */}
+            <div className="bg-gray-50 border-l-4 border-juve-gold p-4 mb-8 flex items-center gap-3">
+              <Info className="w-5 h-5 text-juve-gold shrink-0" />
+              <p className="text-sm font-bold text-gray-700 uppercase tracking-tight">
+                Il modulo di contatto è temporaneamente inattivo. Per qualsiasi informazione, vi invitiamo a scriverci direttamente via email a <span className="text-juve-gold">jcdenna@gmail.com</span>.
+              </p>
+            </div>
+
+            <form className="space-y-8 opacity-40 cursor-not-allowed select-none">
+              <fieldset disabled className="space-y-8 w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="relative group">
+                    <label className="block text-xs font-bold uppercase text-gray-400 mb-2 transition-colors">Nome</label>
+                    <input type="text" className="w-full border-b-2 border-gray-200 outline-none py-3 transition-all text-black font-medium cursor-not-allowed" placeholder="Inserisci il tuo nome" />
+                  </div>
+                  <div className="relative group">
+                    <label className="block text-xs font-bold uppercase text-gray-400 mb-2 transition-colors">Cognome</label>
+                    <input type="text" className="w-full border-b-2 border-gray-200 outline-none py-3 transition-all text-black font-medium cursor-not-allowed" placeholder="Inserisci il tuo cognome" />
+                  </div>
                 </div>
                 <div className="relative group">
-                  <label className="block text-xs font-bold uppercase text-gray-400 mb-2 group-focus-within:text-black transition-colors">Cognome</label>
-                  <input type="text" className="w-full border-b-2 border-gray-200 focus:border-black outline-none py-3 transition-all text-black font-medium" placeholder="Inserisci il tuo cognome" />
+                  <label className="block text-xs font-bold uppercase text-gray-400 mb-2 transition-colors">Email</label>
+                  <input type="email" className="w-full border-b-2 border-gray-200 outline-none py-3 transition-all text-black font-medium cursor-not-allowed" placeholder="esempio@email.it" />
                 </div>
-              </div>
-              <div className="relative group">
-                <label className="block text-xs font-bold uppercase text-gray-400 mb-2 group-focus-within:text-black transition-colors">Email</label>
-                <input type="email" className="w-full border-b-2 border-gray-200 focus:border-black outline-none py-3 transition-all text-black font-medium" placeholder="esempio@email.it" />
-              </div>
-              <div className="relative group">
-                <label className="block text-xs font-bold uppercase text-gray-400 mb-2 group-focus-within:text-black transition-colors">Il tuo Messaggio</label>
-                <textarea rows={4} className="w-full border-b-2 border-gray-200 focus:border-black outline-none py-3 transition-all resize-none text-black font-medium" placeholder="Come possiamo aiutarti?"></textarea>
-              </div>
-              <button type="submit" className="bg-black text-white font-display font-bold uppercase text-sm tracking-widest px-12 py-5 hover:bg-juve-gold hover:text-black transition-all shadow-xl hover:shadow-juve-gold/20">
-                Invia Richiesta
-              </button>
+                <div className="relative group">
+                  <label className="block text-xs font-bold uppercase text-gray-400 mb-2 transition-colors">Il tuo Messaggio</label>
+                  <textarea rows={4} className="w-full border-b-2 border-gray-200 outline-none py-3 transition-all resize-none text-black font-medium cursor-not-allowed" placeholder="Come possiamo aiutarti?"></textarea>
+                </div>
+                <button type="button" className="bg-gray-400 text-white font-display font-bold uppercase text-sm tracking-widest px-12 py-5 cursor-not-allowed">
+                  Invia Richiesta
+                </button>
+              </fieldset>
             </form>
           </div>
 

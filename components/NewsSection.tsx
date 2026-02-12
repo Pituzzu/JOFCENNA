@@ -66,13 +66,13 @@ const NEWS_ITEMS: NewsCardData[] = [
 ];
 
 const PARTNERS = [
-  { id: 1, url: "http://palestralc.altervista.org/img/print.png", name: "Print" },
+  { id: 7, url: "http://avid3952177.altervista.org/img/sicurezza.png", name: "Impresa di pulizia e servizi integrati" },
   { id: 2, url: "http://palestralc.altervista.org/img/La_nuova_posta.png", name: "La Nuova Posta" },
   { id: 3, url: "http://palestralc.altervista.org/img/Americo_Generali.png", name: "Americo Generali" },
-  { id: 4, url: null, name: "Spazio Disponibile" },
-  { id: 5, url: null, name: "Spazio Disponibile" },
-  { id: 6, url: null, name: "Spazio Disponibile" },
-  { id: 7, url: null, name: "Spazio Disponibile" },
+  { id: 4, url: "http://avid3952177.altervista.org/img/Max_Market.png", name: "Max Market" },
+  { id: 5, url: "http://avid3952177.altervista.org/img/borgo_Deodato.png", name: "Borgo Deodato" },
+  { id: 6, url: "http://avid3952177.altervista.org/img/nuova_3d.png", name: "Nuova 3D" },
+  { id: 1, url: "http://palestralc.altervista.org/img/print.png", name: "Print" },
   { id: 8, url: null, name: "Spazio Disponibile" },
 ];
 
