@@ -43,7 +43,7 @@ const NEWS_ITEMS: NewsCardData[] = [
     id: 3,
     category: "Comunicazione Ufficiale",
     title: "Rinnovo Consiglio Direttivo",
-    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop",
+    image: "http://avid3952177.altervista.org/img/Direttivo/direttivo.jpeg",
     buttonText: "Leggi l'Articolo",
     action: "board-election"
   },
@@ -51,15 +51,15 @@ const NEWS_ITEMS: NewsCardData[] = [
     id: 4,
     category: "Riconoscimenti",
     title: "Premiati al JOFC Day 2025 per l'evento con Vucinic",
-    image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=800&auto=format&fit=crop", 
+    image: "http://avid3952177.altervista.org/img/premiazione_evento_jofc.jpeg", 
     buttonText: "Leggi l'Articolo",
     action: "jofc-award"
   },
   {
     id: 5,
     category: "Nomina Ufficiale",
-    title: "Presidente Michele Russo nominato Referente Regionale",
-    image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop", 
+    title: "Il presidente Michele Russo nominato referente regionale",
+    image: "http://avid3952177.altervista.org/img/WhatsApp_Image_2026-02-13_at_11.45.10__1_.jpeg", 
     buttonText: "Leggi l'Articolo",
     action: "president-referent"
   }

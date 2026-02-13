@@ -38,10 +38,10 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
       name: 'IL CLUB', 
       href: '#about',
       submenu: [
-        { name: 'STORIA', href: '#storia', action: 'home' },
+        { name: 'STORIA', href: '#', action: 'wip' },
         { name: 'SOCI FONDATORI', href: '#', action: 'founders' },
         { name: 'DIRETTIVO', href: '#', action: 'board-members' },
-        { name: 'SEDE', href: '#sede', action: 'home' }
+        { name: 'SEDE', href: '#', action: 'clubhouse' }
       ]
     },
     { name: 'SOCI 25/26', href: '#membership', action: 'members' },
@@ -81,6 +81,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
           onNavigate('events-gallery');
       } else if (action === 'enna') {
           onNavigate('enna');
+      } else if (action === 'clubhouse') {
+          onNavigate('clubhouse');
       } else {
           onNavigate('home');
           if (href && href.startsWith('#')) {

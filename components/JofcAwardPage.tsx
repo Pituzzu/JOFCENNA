@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { ArrowLeft, Trophy, Star, Award } from 'lucide-react';
+import { ArrowLeft, Trophy } from 'lucide-react';
 
 interface JofcAwardPageProps {
   onBack: () => void;
@@ -14,6 +13,7 @@ const JofcAwardPage: React.FC<JofcAwardPageProps> = ({ onBack }) => {
          <img 
             src="http://palestralc.altervista.org/img/FAN_WHITE_ENNA.png" 
             className="w-[80%] md:w-[50%] h-auto grayscale"
+            alt="Watermark"
          />
       </div>
 
@@ -49,6 +49,20 @@ const JofcAwardPage: React.FC<JofcAwardPageProps> = ({ onBack }) => {
           </div>
 
           <div className="p-8 md:p-12">
+            {/* Immagine Principale Premiazione - Rimpicciolita con max-w-2xl */}
+            <div className="mb-10 flex flex-col items-center">
+               <div className="relative w-full max-w-2xl border-4 border-black shadow-xl overflow-hidden rounded-sm bg-gray-100">
+                  <img 
+                    src="http://avid3952177.altervista.org/img/premiazione_evento_jofc.jpeg" 
+                    alt="Premiazione JOFC Day 2025" 
+                    className="w-full h-auto block"
+                  />
+               </div>
+               <p className="mt-4 text-center text-[10px] font-bold uppercase tracking-widest text-gray-400 italic">
+                 Il Presidente Michele Russo ritira il premio "Sharing is Caring"
+               </p>
+            </div>
+
             <div className="prose prose-lg text-gray-700 font-sans mb-10 text-justify leading-relaxed">
               <p className="mb-6">
                 Il nostro <strong>Juventus Official Fan Club Enna</strong> è stato premiato allo JOFC Day 2025, svoltosi in Sardegna il 3 e 4 maggio, come secondo miglior evento al mondo nella categoria <strong>“Sharing is Caring”</strong>, grazie all’iniziativa <em>“Insieme per lo sport… con Mirko Vučinić”</em>, organizzata lo scorso 12 aprile.
@@ -67,18 +81,18 @@ const JofcAwardPage: React.FC<JofcAwardPageProps> = ({ onBack }) => {
               </p>
             </div>
 
-            {/* Achievement Details */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-               <div className="flex flex-col items-center text-center p-8 bg-black text-white rounded-lg">
-                  <Award className="w-12 h-12 text-juve-gold mb-4" />
-                  <h4 className="font-display font-bold uppercase text-xl mb-2">2° Posto Mondiale</h4>
-                  <p className="text-gray-400 text-sm">Categoria Sharing is Caring</p>
+            {/* Seconda Immagine Premiazione */}
+            <div className="mb-12">
+               <div className="relative w-full border-4 border-black shadow-xl overflow-hidden rounded-sm bg-gray-100">
+                  <img 
+                    src="http://avid3952177.altervista.org/img/jofc_day_premiazione_evento.jpeg" 
+                    alt="Momento Premiazione" 
+                    className="w-full h-auto block"
+                  />
                </div>
-               <div className="flex flex-col items-center text-center p-8 border-2 border-black rounded-lg">
-                  <Star className="w-12 h-12 text-black mb-4" />
-                  <h4 className="font-display font-bold uppercase text-xl mb-2">Fair Play</h4>
-                  <p className="text-gray-600 text-sm">Riconoscimento allo sport pulito</p>
-               </div>
+               <p className="mt-4 text-center text-[10px] font-bold uppercase tracking-widest text-gray-400 italic">
+                 Un momento memorabile per lo JOFC Enna sul palco dello JOFC Day
+               </p>
             </div>
 
             <div className="prose prose-lg text-gray-700 font-sans mb-12 text-justify">

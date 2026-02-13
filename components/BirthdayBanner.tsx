@@ -13,8 +13,11 @@ const BirthdayBanner: React.FC = () => {
 
   const hasBirthdays = birthdays.length > 0;
   
-  // Prepariamo la lista per il marquee se ci sono compleanni
-  const marqueeList = hasBirthdays ? Array(20).fill(birthdays).flat() : [];
+  // Se non ci sono compleanni, usiamo un messaggio di fallback da far scorrere
+  const displayItems = hasBirthdays ? birthdays : ["Nessun compleanno oggi"];
+  
+  // Prepariamo la lista per il marquee ripetendo gli elementi
+  const marqueeList = Array(20).fill(displayItems).flat();
 
   return (
     <div className="relative z-30 bg-white border-t-4 border-juve-gold overflow-hidden py-2 shadow-2xl">
@@ -29,23 +32,16 @@ const BirthdayBanner: React.FC = () => {
             </span>
         </div>
 
-        {/* Scrolling Content (Marquee) - Solo se ci sono compleanni */}
-        <div className={`flex items-center whitespace-nowrap pl-56 md:pl-96 ${hasBirthdays ? 'animate-marquee' : ''}`}>
-          {hasBirthdays ? (
-            marqueeList.map((text, index) => (
+        {/* Scrolling Content (Marquee) - Ora scorre sempre */}
+        <div className="flex items-center whitespace-nowrap pl-56 md:pl-96 animate-marquee">
+            {marqueeList.map((text, index) => (
               <React.Fragment key={index}>
-                <span className="text-black font-display font-bold text-xl uppercase mx-4 tracking-tight">
+                <span className={`font-display font-bold text-xl uppercase mx-4 tracking-tight ${hasBirthdays ? 'text-black' : 'text-black/30 italic'}`}>
                   {text}
                 </span>
-                <Cake className="w-5 h-5 mx-8 text-juve-gold animate-bounce" />
+                <Cake className={`w-5 h-5 mx-8 text-juve-gold ${hasBirthdays ? 'animate-bounce' : 'opacity-20'}`} />
               </React.Fragment>
-            ))
-          ) : (
-            /* Messaggio se non ci sono compleanni (non scorre) */
-            <span className="text-black/20 font-display font-bold text-xl uppercase mx-4 tracking-tight italic">
-              Nessun compleanno oggi
-            </span>
-          )}
+            ))}
         </div>
       </div>
     </div>

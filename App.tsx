@@ -19,10 +19,11 @@ import WorkInProgressPage from './components/WorkInProgressPage';
 import EventsGalleryPage from './components/EventsGalleryPage';
 import EventDetailGalleryPage from './components/EventDetailGalleryPage';
 import EnnaCityPage from './components/EnnaCityPage';
+import ClubhousePage from './components/ClubhousePage';
 import AdminLoginPage from './components/AdminLoginPage';
 import AdminDashboard from './components/AdminDashboard';
 
-export type ViewState = 'home' | 'members' | 'charity' | 'work-in-progress' | 'founders' | 'board-election' | 'jofc-award' | 'president-referent' | 'board-members' | 'events-gallery' | 'event-detail' | 'enna' | 'admin-login' | 'admin-dashboard';
+export type ViewState = 'home' | 'members' | 'charity' | 'work-in-progress' | 'founders' | 'board-election' | 'jofc-award' | 'president-referent' | 'board-members' | 'events-gallery' | 'event-detail' | 'enna' | 'clubhouse' | 'admin-login' | 'admin-dashboard';
 
 function App() {
   const [currentView, setCurrentView] = useState<ViewState>('home');
@@ -58,6 +59,8 @@ function App() {
         return <EventDetailGalleryPage eventId={selectedEventId || 1} onBack={() => handleNavigate('events-gallery')} />;
       case 'enna':
         return <EnnaCityPage onBack={() => handleNavigate('home')} />;
+      case 'clubhouse':
+        return <ClubhousePage onBack={() => handleNavigate('home')} />;
       case 'work-in-progress':
         return <WorkInProgressPage onBack={() => handleNavigate('home')} />;
       case 'admin-login':

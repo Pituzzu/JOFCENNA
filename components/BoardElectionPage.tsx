@@ -14,6 +14,7 @@ const BoardElectionPage: React.FC<BoardElectionPageProps> = ({ onBack }) => {
          <img 
             src="http://palestralc.altervista.org/img/FAN_WHITE_ENNA.png" 
             className="w-[80%] md:w-[50%] h-auto grayscale"
+            alt="Watermark"
          />
       </div>
 
@@ -36,15 +37,14 @@ const BoardElectionPage: React.FC<BoardElectionPageProps> = ({ onBack }) => {
              <div className="relative z-10">
                 <h2 className="text-juve-gold font-bold uppercase tracking-widest text-sm mb-4">Comunicato Ufficiale</h2>
                 <h1 className="font-display font-black text-3xl md:text-5xl uppercase leading-tight text-white">
-                  Rinnovo Consiglio Direttivo <br/>
-                  <span className="text-gray-500">Biennio 2025/2027</span>
+                  Rinnovo Consiglio Direttivo
                 </h1>
                 <div className="w-20 h-1 bg-juve-gold mx-auto mt-6"></div>
              </div>
           </div>
 
           <div className="p-8 md:p-12">
-            <div className="prose prose-lg text-gray-700 font-sans mb-12 text-justify leading-relaxed">
+            <div className="prose prose-lg text-gray-700 font-sans mb-8 text-justify leading-relaxed">
               <p className="mb-6">
                 Ieri, <strong>22 giugno 2025</strong>, l’Assemblea dei Soci, regolarmente riunita presso la sede del Club, ha provveduto al rinnovo delle cariche sociali per il prossimo biennio, eleggendo i nuovi componenti del Consiglio Direttivo, che risulta così composto:
               </p>
@@ -119,13 +119,27 @@ const BoardElectionPage: React.FC<BoardElectionPageProps> = ({ onBack }) => {
                </p>
             </div>
 
-            <div className="prose prose-lg text-gray-700 font-sans mb-12 text-justify italic border-t border-gray-100 pt-8">
+            <div className="prose prose-lg text-gray-700 font-sans mb-8 text-justify italic border-t border-gray-100 pt-8">
               <p className="mb-4">
                 Ai membri uscenti va un sentito ringraziamento per il contributo offerto al Club con dedizione e competenza.
               </p>
               <p>
                 Ai nuovi componenti del Consiglio Direttivo, l’augurio di un percorso ricco di entusiasmo, partecipazione e spirito bianconero.
               </p>
+            </div>
+
+            {/* Foto di Gruppo - Spostata alla fine e rimpicciolita */}
+            <div className="mb-12 flex flex-col items-center">
+               <div className="relative w-full max-w-lg border-2 border-black shadow-lg overflow-hidden rounded-sm bg-gray-100">
+                  <img 
+                    src="http://avid3952177.altervista.org/img/Direttivo/direttivo.jpeg" 
+                    alt="Il Direttivo dello JOFC Enna" 
+                    className="w-full h-auto block"
+                  />
+               </div>
+               <p className="mt-3 text-center text-[9px] font-bold uppercase tracking-widest text-gray-400 italic">
+                 Il Direttivo dello JOFC Enna
+               </p>
             </div>
 
             {/* Footer Sign-off */}

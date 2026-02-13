@@ -40,23 +40,23 @@ const PresidentReferentPage: React.FC<PresidentReferentPageProps> = ({ onBack })
                       <Map className="w-10 h-10" />
                    </div>
                 </div>
-                <h2 className="text-juve-gold font-bold uppercase tracking-widest text-sm mb-4">Nomina Ufficiale Juventus FC</h2>
-                <h1 className="font-display font-black text-3xl md:text-5xl uppercase leading-tight text-white">
-                  Michele Russo <br/>
-                  <span className="text-gray-500">Referente Regionale Sicilia</span>
+                <h1 className="font-display font-black text-xl md:text-3xl uppercase leading-tight text-white max-w-2xl mx-auto">
+                  Il presidente Michele Russo nominato <br/>
+                  Referente Regionale Sicilia
                 </h1>
                 <div className="w-20 h-1 bg-juve-gold mx-auto mt-6"></div>
              </div>
           </div>
 
           <div className="p-8 md:p-12">
+            
             <div className="prose prose-lg text-gray-700 font-sans mb-10 text-justify leading-relaxed">
               <p className="mb-6">
-                Congratulazioni al nostro Presidente <strong>Michele Russo</strong> per aver ricevuto da Juventus FC la nomina di <strong>Referente Regionale Juventus OFC Sicilia</strong>.
+                <strong>IL PRESIDENTE Michele Russo</strong> è stato ufficialmente nominato da <strong>Juventus FC</strong> come nuovo <strong>Referente Regionale Juventus Official Fan Club per la Sicilia</strong>. Questo prestigioso incarico rappresenta non solo un traguardo personale per il nostro presidente, ma un immenso motivo di orgoglio per tutto lo JOFC Enna, che vede riconosciuto a livello nazionale il lavoro svolto in questi anni nel territorio.
               </p>
               
               <p className="mb-6">
-                Questa importante nomina ci rende particolarmente orgogliosi e rappresenta un prestigioso traguardo per il nostro Club.
+                La nomina è stata confermata direttamente dai vertici della società bianconera a Torino, premiando la dedizione, la serietà e la passione con cui Michele Russo ha guidato il Club di Enna fin dalla sua fondazione, rendendolo un modello di efficienza e partecipazione.
               </p>
 
               <div className="bg-gray-100 p-8 rounded-lg mb-8 border-l-4 border-black">
@@ -65,15 +65,19 @@ const PresidentReferentPage: React.FC<PresidentReferentPageProps> = ({ onBack })
                     <h3 className="font-display font-bold text-xl uppercase text-black">Il Nuovo Ruolo</h3>
                  </div>
                  <p className="text-lg text-gray-800">
-                   Il nostro presidente affiancherà <strong>Salvatore Capraro</strong>, Presidente JOFC Valle dei Templi, nel coordinamento delle attività regionali.
+                   Nel suo nuovo ruolo, il nostro presidente avrà il compito di coordinare le attività dei Club siciliani, facilitando il dialogo con la Juventus e promuovendo iniziative regionali, affiancando in questo percorso <strong>Salvatore Capraro</strong> (Presidente JOFC Valle dei Templi).
                  </p>
               </div>
+
+              <p className="mb-6 italic">
+                Questa nomina rafforza il legame tra la Sicilia e Torino, portando la voce dei tanti tifosi dell'isola sempre più vicina ai colori che amiamo. A Michele Russo vanno i più sinceri auguri di buon lavoro da parte di tutto il Consiglio Direttivo e dei soci del Club.
+              </p>
             </div>
 
             {/* Footer Sign-off */}
             <div className="text-center pt-8 border-t border-gray-100">
                <p className="font-display font-bold text-2xl text-black uppercase mb-6">
-                  Buon lavoro 🤍🖤
+                  Buon lavoro Presidente! 🤍🖤
                </p>
                <p className="font-display font-black text-3xl text-juve-gold uppercase tracking-tighter mb-2">
                  #jofcenna
