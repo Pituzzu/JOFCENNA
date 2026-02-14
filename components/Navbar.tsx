@@ -108,10 +108,10 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
             src="http://palestralc.altervista.org/img/FAN_BLACK_ENNA.png" 
             onError={(e) => {
                 e.currentTarget.src = "https://upload.wikimedia.org/wikipedia/commons/5/51/Juventus_FC_2017_logo.svg";
-                e.currentTarget.className = "h-12 w-auto p-2 filter brightness-0"; 
+                e.currentTarget.className = "h-10 w-auto p-2 filter brightness-0"; 
             }}
             alt="Juventus Official Fan Club Enna" 
-            className="h-12 md:h-14 w-auto object-contain transition-all"
+            className="h-9 md:h-11 w-auto object-contain transition-all"
           />
         </div>
 

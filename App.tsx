@@ -83,7 +83,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black font-sans selection:bg-juve-gold selection:text-black">
+    <div className="min-h-screen bg-black font-sans selection:bg-juve-gold selection:text-black animate-fade-in">
       {currentView !== 'admin-login' && currentView !== 'admin-dashboard' && <Navbar onNavigate={handleNavigate} />}
       
       <main>

@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { ArrowLeft } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowLeft, Loader2 } from 'lucide-react';
 
 interface Member {
   name: string;
@@ -24,7 +24,12 @@ const TOP_BOARD: Member[] = [
     image: "http://avid3952177.altervista.org/img/Direttivo/russo.png",
     noGrayscale: true 
   },
-  { name: "Luciano Lombardo", role: "VICE PRESIDENTE", image: PLACEHOLDER_IMAGE },
+  { 
+    name: "Luciano Lombardo", 
+    role: "VICE PRESIDENTE", 
+    image: "http://avid3952177.altervista.org/img/Direttivo/Luciano_Lombardo_Mod.jpeg",
+    noGrayscale: true 
+  },
 ];
 
 const MID_BOARD: Member[] = [
@@ -53,7 +58,9 @@ const BOTTOM_BOARD: Member[] = [
   { 
     name: "Stefania Sicurezza", 
     role: "CONSIGLIERE", 
-    image: PLACEHOLDER_IMAGE 
+    image: "http://avid3952177.altervista.org/img/Direttivo/stefania_sicurezza.png",
+    noGrayscale: true,
+    zoomClass: "scale-100"
   },
   { 
     name: "Luca Andolina", 
@@ -71,6 +78,8 @@ const AUDITORS = [
 ];
 
 const MemberCard: React.FC<{ member: Member; size?: 'lg' | 'md' | 'sm' }> = ({ member, size = 'md' }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const sizeClasses = {
     lg: 'w-48 h-48 md:w-56 md:h-56',
     md: 'w-40 h-40 md:w-48 md:h-48',
@@ -80,10 +89,20 @@ const MemberCard: React.FC<{ member: Member; size?: 'lg' | 'md' | 'sm' }> = ({ m
   return (
     <div className="flex flex-col items-center text-center">
       <div className={`relative ${sizeClasses[size]} rounded-full border-4 border-white overflow-hidden shadow-2xl mb-4 bg-black flex items-center justify-center`}>
+         {/* Placeholder/Loading State */}
+         {!isLoaded && (
+           <div className="absolute inset-0 flex items-center justify-center bg-zinc-900 animate-pulse">
+             <Loader2 className="w-6 h-6 text-juve-gold animate-spin opacity-30" />
+           </div>
+         )}
+         
          <img 
             src={member.image} 
             alt={member.name} 
-            className={`w-full h-full object-cover transition-transform duration-300 ${member.noGrayscale ? '' : 'grayscale'} ${member.zoomClass || ''}`}
+            loading="lazy"
+            decoding="async"
+            onLoad={() => setIsLoaded(true)}
+            className={`w-full h-full object-cover transition-all duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'} ${member.noGrayscale ? '' : 'grayscale'} ${member.zoomClass || 'scale-100'}`}
          />
       </div>
       <h4 className="font-display font-bold text-white text-lg md:text-xl uppercase italic tracking-tight leading-none mb-1">
@@ -169,6 +188,8 @@ const BoardMembersPage: React.FC<BoardMembersPageProps> = ({ onBack }) => {
               <img 
                 src="http://avid3952177.altervista.org/img/Direttivo/direttivo.jpeg" 
                 alt="Il Direttivo dello JOFC Enna" 
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto block"
               />
            </div>
